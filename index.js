@@ -4,7 +4,8 @@ const app = express();
 const PORT = 3000;
 const dotenv = require('dotenv');
 const cors = require('cors');
-
+const path = require('path');
+const dataFilePath = path.join(__dirname, 'data.json');
 dotenv.config();
 
 // Middleware untuk parsing body dalam format JSON
@@ -13,7 +14,7 @@ app.use(cors());
 
 // Routes
 app.get('/users', (req, res) => {
-  fs.readFile('data.json', 'utf8', (err, data) => {
+  fs.readFile(dataFilePath, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
